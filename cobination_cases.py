@@ -7,15 +7,15 @@ def recur(li, position: int):
         all_possible_cases.append(li.copy())
         return
 
-    li[position] = 'W'
+    li[position] = '⬜'
     recur(li, position + 1)
 
-    li[position] = 'Y'
+    li[position] = '🟨'
     recur(li, position + 1)
 
-    li[position] = 'G'
+    li[position] = '🟩'
     recur(li, position + 1)
 
 
 all_possible_cases: List[List[str]] = []
-recur(['W️', 'W️', 'W️', 'W️', 'W️'], 0)
+recur(['W', 'W', 'W', 'W', 'W'], 0)
