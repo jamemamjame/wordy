@@ -1,18 +1,18 @@
 from typing import List
 
 
-def is_match_case(next_guess_word: str, possible_answer_word: str, case: List[str]) -> bool:
+def is_match_case(candidate_word: str, labeled_word: str, case: List[str]) -> bool:
     result = True
     for i, c in enumerate(case):
         if c == '🟩':
-            result = result and (next_guess_word[i] == possible_answer_word[i])
+            result = result and (labeled_word[i] == candidate_word[i])
 
         elif c == '⬜':
-            result = result and (next_guess_word[i] not in possible_answer_word)
+            result = result and (labeled_word[i] not in candidate_word)
 
         elif c == '🟨':
             result = result and (
-                    next_guess_word[i] in next_guess_word and next_guess_word[i] != possible_answer_word[i])
+                    labeled_word[i] in labeled_word and labeled_word[i] != candidate_word[i])
         else:
             raise ValueError(f'Unknown charactor {c} len={len(c)}')
         if not result:
@@ -20,10 +20,10 @@ def is_match_case(next_guess_word: str, possible_answer_word: str, case: List[st
     return True
 
 
-def filter_words_by_case(remaining_words, played_word, case: List[str]) -> List[str]:
+def filter_words_by_case(possible_words_answer, played_word, case: List[str]) -> List[str]:
     filtered_words = []
-    for word in remaining_words:
-        if is_match_case(word, played_word, case):
+    for word in possible_words_answer:
+        if is_match_case(candidate_word=word, labeled_word=played_word, case=case):
             filtered_words.append(word)
     return filtered_words
 

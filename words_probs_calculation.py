@@ -1,24 +1,29 @@
+import concurrent.futures
 from typing import List
 
 from initial_resource import ALL_POSSIBLE_CASES
 import match_cases as mc
 
 
+def __update_words_prob(words_prob: dict, case: List[str], hash_case: str, possible_words_to_play: List[str],
+                        possible_words_answer: List[str]):
+    for j, able_to_play_word in enumerate(possible_words_to_play):
+        words_prob[able_to_play_word, hash_case] = 0
+        for k, possible_answer_word in enumerate(possible_words_answer):
+            words_prob[able_to_play_word, hash_case] += mc.is_match_case(
+                candidate_word=possible_answer_word,
+                labeled_word=able_to_play_word,
+                case=case
+            )
+        words_prob[able_to_play_word, hash_case] /= len(possible_words_answer)
+
+
 def calculate_words_prob(possible_words_to_play: List[str], possible_words_answer: List[str]):
     words_prob = dict()
-    for i, case in enumerate(ALL_POSSIBLE_CASES):
-        hash_case = ''.join(case)
-        # print(f'{i + 1}/{len(all_possible_cases)}) {hash_case}')
-        for j, able_to_play_word in enumerate(possible_words_to_play):
-            words_prob[able_to_play_word, hash_case] = 0
-            # TODO: check if never play this word yet
-            # print(f'\t{j + 1}/{len(all_words)}) {guess_word}')
-            for k, possible_answer_word in enumerate(possible_words_answer):
-                # print(f'\t\t{k + 1}/{len(possible_answer_words)}) {possible_answer_word}')
-                words_prob[able_to_play_word, hash_case] += mc.is_match_case(
-                    next_guess_word=able_to_play_word,
-                    possible_answer_word=possible_answer_word,
-                    case=case
-                )
-            words_prob[able_to_play_word, hash_case] /= len(possible_words_answer)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=200) as executor:
+        for i, case in enumerate(ALL_POSSIBLE_CASES):
+            hash_case = ''.join(case)
+            print(f'{i + 1}/{len(ALL_POSSIBLE_CASES)}) {hash_case}')
+            executor.submit(__update_words_prob, words_prob, case, hash_case, possible_words_to_play,
+                            possible_words_answer)
     return words_prob
