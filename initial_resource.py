@@ -2,9 +2,9 @@ from typing import List
 
 
 def recur(li, position: int):
-    global all_possible_cases
+    global ALL_POSSIBLE_CASES
     if position >= len(li):
-        all_possible_cases.append(li.copy())
+        ALL_POSSIBLE_CASES.append(li.copy())
         return
 
     li[position] = '⬜'
@@ -17,5 +17,13 @@ def recur(li, position: int):
     recur(li, position + 1)
 
 
-all_possible_cases: List[List[str]] = []
+def get_all_words():
+    with open('sgb-words.txt', 'r') as f:
+        all_words = [l.strip() for l in f.readlines()]
+    return all_words
+
+
+ALL_POSSIBLE_CASES: List[List[str]] = []
 recur(['W', 'W', 'W', 'W', 'W'], 0)
+
+ALL_WORDS: List[str] = get_all_words()
