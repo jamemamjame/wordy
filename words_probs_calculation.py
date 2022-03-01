@@ -26,7 +26,7 @@ def calculate_words_prob(possible_words_to_play: List[str], possible_words_answe
     with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
         for i, case in enumerate(ALL_POSSIBLE_CASES):
             hash_case = ''.join(case)
-            print(f'{i + 1}/{len(ALL_POSSIBLE_CASES)}) {hash_case}')
+            # print(f'{i + 1}/{len(ALL_POSSIBLE_CASES)}) {hash_case}')
             for j, able_to_play_word in enumerate(possible_words_to_play):
                 if use_thread:
                     executor.submit(__update_words_prob, words_prob, case, hash_case, able_to_play_word,

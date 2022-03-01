@@ -1,24 +1,51 @@
-# -*- coding: utf-8 -*-
-from cobination_cases import all_possible_cases
-import match_cases as mc
+from typing import List
 
-with open('sgb-words.txt', 'r') as f:
-    all_words = [l.strip() for l in f.readlines()]
+from initial_resource import ALL_WORDS
+from match_cases import filter_words_by_case, is_match_case
+from score_calculator import calculate_gini_by_word
+from words_probs_calculation import calculate_words_prob
 
-possible_answer_words = all_words.copy()
-words_prob = dict()
-for i, case in enumerate(all_possible_cases):
-    hash_case = ''.join(case)
-    print(f'{i + 1}/{len(all_possible_cases)}) {hash_case}')
-    for j, guess_word in enumerate(all_words[:1]):
-        words_prob[guess_word, hash_case] = 0
-        # TODO: check if never play this word yet
-        # print(f'\t{j + 1}/{len(all_words)}) {guess_word}')
-        for k, possible_answer_word in enumerate(possible_answer_words):
-            # print(f'\t\t{k + 1}/{len(possible_answer_words)}) {possible_answer_word}')
-            words_prob[guess_word, hash_case] += mc.is_match_case(
-                next_guess_word=guess_word,
-                possible_answer_word=possible_answer_word,
-                case=case
-            )
-        words_prob[guess_word, hash_case] /= len(possible_answer_words)
+
+def calculate_words_should_be_played_score(possible_words_to_play, possible_words_answer):
+    words_prob = calculate_words_prob(possible_words_to_play, possible_words_answer, use_thread=False)
+    sorted_word_score = calculate_gini_by_word(words_prob)
+    return sorted_word_score
+
+
+possible_words_to_play = ALL_WORDS.copy()
+possible_words_answer = ALL_WORDS.copy()
+
+played_word = 'tales'
+feedback_case = ['⬜', '⬜', '⬜', '🟩', '⬜']
+possible_words_to_play.remove(played_word)
+possible_words_answer: List[str] = filter_words_by_case(possible_words_answer=possible_words_answer,
+                                                        played_word=played_word,
+                                                        case=feedback_case)
+word_should_be_played = calculate_words_should_be_played_score(possible_words_to_play, possible_words_answer)
+
+# ----------
+played_word = 'doper'
+feedback_case = ['⬜', '⬜', '🟩', '🟩', '🟨']
+possible_words_to_play.remove(played_word)
+possible_words_answer: List[str] = filter_words_by_case(possible_words_answer=possible_words_answer,
+                                                        played_word=played_word,
+                                                        case=feedback_case)
+word_should_be_played = calculate_words_should_be_played_score(possible_words_to_play, possible_words_answer)
+
+# ----------
+played_word = 'weeny'
+feedback_case = ['⬜', '🟨', '🟨', '⬜', '⬜']
+possible_words_to_play.remove(played_word)
+possible_words_answer: List[str] = filter_words_by_case(possible_words_answer=possible_words_answer,
+                                                        played_word=played_word,
+                                                        case=feedback_case)
+word_should_be_played = calculate_words_should_be_played_score(possible_words_to_play, possible_words_answer)
+
+# --------
+played_word = 'prune'
+feedback_case = ['🟨', '🟨', '🟨', '⬜', '🟩']
+possible_words_to_play.remove(played_word)
+possible_words_answer: List[str] = filter_words_by_case(possible_words_answer=possible_words_answer,
+                                                        played_word=played_word,
+                                                        case=feedback_case)
+word_should_be_played = calculate_words_should_be_played_score(possible_words_to_play, possible_words_answer)
