@@ -2,27 +2,26 @@ from typing import List, Tuple
 
 
 def is_match_case(candidate_word: str, labeled_word: str, case: List[str]) -> bool:
-    result = True
-    for i, c in enumerate(case):
-        target_char = labeled_word[i]
-        if c == '🟩':
-            result = result and (target_char == candidate_word[i])
-
-        elif c == '⬜':
-            sub_result = True
-            for j in range(len(candidate_word)):
-                if candidate_word[j] == target_char:
-                    if case[j] != '🟩':
-                        sub_result = False
-                        break
-            result = result and sub_result
-        elif c == '🟨':
-            result = result and (
-                    target_char in labeled_word and target_char != candidate_word[i])
-        else:
-            raise ValueError(f'Unknown charactor {c} len={len(c)}')
-        if not result:
-            return False
+    candidate_word = list(candidate_word)
+    # check green
+    for i in range(len(case)):
+        if case[i] == '🟩':
+            if labeled_word[i] != candidate_word[i]:
+                return False
+            else:
+                candidate_word[i] = None
+    # check yellow
+    for i in range(len(case)):
+        if case[i] == '🟨':
+            if labeled_word[i] in candidate_word:
+                idx = candidate_word.index(labeled_word[i])
+                candidate_word[idx] = None
+            else:
+                return False
+    for i in range(len(case)):
+        if case[i] == '⬜':
+            if labeled_word[i] in candidate_word:
+                return False
     return True
 
 
@@ -62,9 +61,9 @@ def generate_feedback(played_word: str, answer_word: str):
 
 def test_is_match_case():
     assert is_match_case('again', 'async', ['🟩', '⬜', '⬜', '🟨', '⬜']) == True
-    assert is_match_case('again', 'async', ['🟩', '⬜', '🟨', '🟨', '⬜']) == True
-    assert is_match_case('abccd', 'ccccc', ['🟨', '🟨', '🟩', '🟩', '🟨']) == True
+    assert is_match_case('abccd', 'ccccc', ['⬜', '⬜', '🟩', '🟩', '⬜']) == True
     assert is_match_case('rupee', 'tepee', ['⬜', '⬜', '🟩', '🟩', '🟩']) == True
+    assert is_match_case('rupee', 'reeve', ['🟩', '🟨', '⬜', '⬜', '🟩']) == True
 
 
 def test_generate_feedback():
@@ -72,3 +71,4 @@ def test_generate_feedback():
     assert generate_feedback('count', 'rupee') == ['⬜', '⬜', '🟨', '⬜', '⬜']
     assert generate_feedback('tepee', 'rupee') == ['⬜', '⬜', '🟩', '🟩', '🟩']
     assert generate_feedback('prune', 'rupee') == ['🟨', '🟨', '🟨', '⬜', '🟩']
+    assert generate_feedback('reeve', 'rupee') == ['🟩', '🟨', '⬜', '⬜', '🟩']

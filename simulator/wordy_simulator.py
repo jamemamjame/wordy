@@ -19,8 +19,15 @@ class WordySimulator:
             played_word = played_words[-1]
             feedback_case = feedback_cases[-1]
             sorted_word_score = self.__guess_during_game(played_word, feedback_case)
-        word_should_be_played = list(sorted_word_score.keys())[0]
+        word_should_be_played = self.get_final_word_should_be_played(list(sorted_word_score.keys()), played_words)
         return word_should_be_played
+
+    def get_final_word_should_be_played(self, sorted_word_by_score, played_words: List[str]):
+        if len(self.possible_words_answer) == 1:
+            return self.possible_words_answer[0]
+        for word in sorted_word_by_score:
+            if word not in played_words:
+                return word
 
     def __guess_first_round(self):
         with open('./words_prob.pickle', 'rb') as f:
