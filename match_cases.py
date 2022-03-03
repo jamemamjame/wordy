@@ -15,7 +15,10 @@ def is_match_case(candidate_word: str, labeled_word: str, case: List[str]) -> bo
         if case[i] == '🟨':
             if labeled_word[i] in candidate_word:
                 idx = candidate_word.index(labeled_word[i])
-                candidate_word[idx] = None
+                if (i != candidate_word.index(labeled_word[i])):
+                    candidate_word[idx] = None
+                else:
+                    return False
             else:
                 return False
     for i in range(len(case)):
@@ -64,6 +67,7 @@ def test_is_match_case():
     assert is_match_case('abccd', 'ccccc', ['⬜', '⬜', '🟩', '🟩', '⬜']) == True
     assert is_match_case('rupee', 'tepee', ['⬜', '⬜', '🟩', '🟩', '🟩']) == True
     assert is_match_case('rupee', 'reeve', ['🟩', '🟨', '⬜', '⬜', '🟩']) == True
+    assert is_match_case('there', 'nasty', ['🟨', '⬜', '⬜', '⬜', '⬜']) == False
 
 
 def test_generate_feedback():
