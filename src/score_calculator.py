@@ -1,6 +1,6 @@
 import pickle
 import math
-from initial_resource import ALL_POSSIBLE_CASES, ALL_WORDS
+from src.utils import ALL_POSSIBLE_CASES, ALL_WORDS
 
 
 def calculate_gini_by_word(words_prob):
@@ -45,7 +45,7 @@ def calculate_avg_entropy_by_word(words_prob):
     return result
 
 
-with open('words_prob.pickle', 'rb') as f:
+with open('src/resources/words_prob.pickle', 'rb') as f:
     words_prob = pickle.load(f)
 
 # words_gini = calculate_gini_by_word(words_prob)

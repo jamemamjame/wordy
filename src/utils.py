@@ -18,7 +18,7 @@ def recur(li, position: int):
 
 
 def get_all_words():
-    with open('sgb-words.txt', 'r') as f:
+    with open('src/resources/sgb-words.txt', 'r') as f:
         all_words = [l.strip() for l in f.readlines()]
     return all_words
 

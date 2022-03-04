@@ -1,8 +1,8 @@
 import concurrent.futures
 from typing import List
 
-from initial_resource import ALL_POSSIBLE_CASES
-import match_cases as mc
+from src.utils import ALL_POSSIBLE_CASES
+from src import match_cases as mc
 
 
 def __update_words_prob(words_prob: dict, case: List[str], hash_case: str,

@@ -1,5 +1,5 @@
-from initial_resource import ALL_WORDS, COLOR
-from simulator.wordy_simulator import WordySimulator
+from src.utils import ALL_WORDS, COLOR
+from src.simulator.wordy_simulator import WordySimulator
 
 
 def validate_feedback(feedback: str) -> bool:
@@ -11,7 +11,7 @@ def validate_feedback(feedback: str) -> bool:
     return True
 
 
-if __name__ == "__main__":
+def console_interaction_solve_wordle():
     wordy = WordySimulator(possible_words_answer=ALL_WORDS)
 
     # init game
