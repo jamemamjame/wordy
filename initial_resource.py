@@ -27,3 +27,7 @@ ALL_POSSIBLE_CASES: List[List[str]] = []
 recur(['W', 'W', 'W', 'W', 'W'], 0)
 
 ALL_WORDS: List[str] = get_all_words()
+
+COLOR = {
+    'g': '🟩', 'y': '🟨', 'w': '⬜'
+}
