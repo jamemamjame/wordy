@@ -1,3 +1,5 @@
+import time
+
 from constant import GameStatus
 from initial_resource import ALL_WORDS
 from simulator.wordle_simulator import WordleSimulator
@@ -14,12 +16,15 @@ def simulate_game(answer_word: str):
     played_words = []
     feedback_cases = []
     while game_status == GameStatus.ON_GOING:
+        start_time = time.time()
         word_to_play = wordy.guess(round=round, played_words=played_words, feedback_cases=feedback_cases)
+        time_to_calculate_next_word_to_play = time.time() - start_time
         game_status, feedback = wordle.get_game_state(played_word=word_to_play)
         played_words.append(word_to_play)
         feedback_cases.append(feedback)
-        print(f'({round}) play:\t\t{word_to_play}')
+        print(f'({round}) play:\t{word_to_play} ({time_to_calculate_next_word_to_play: .2f} sec)')
         print(f'feedback:\t{"".join(feedback)}')
+        print(f'possible answer: {wordy.possible_words_answer}')
         print()
         round += 1
 
