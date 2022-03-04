@@ -31,7 +31,7 @@ def simulate_game(answer_word: str):
 
 vocabs = ['those', 'moist', 'shard', 'pleat', 'aloft', 'skill', 'elder', 'frame', 'humor', 'pause', 'ulcer', 'ultra',
           'robin', 'cynic', 'aroma', 'caulk', 'shake', 'dodge', 'swill', 'tacit', 'other', 'thorn', 'trove', 'bloke',
-          'vivid', 'spill', 'chant', 'choke']
+          'vivid', 'spill', 'chant', 'choke', 'nasty', 'ahead']
 for vocab in vocabs:
     print(f'======= Vocab is "{vocab.upper()}" =======')
     simulate_game(vocab)
