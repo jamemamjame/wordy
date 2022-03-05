@@ -8,31 +8,31 @@ Console interaction program to solve Wordle game https://www.nytimes.com/games/w
 Hi, I'm Wordy. 🤖🙏🏻
 I will suggest you the word for guessing in Wordle game base on feedback in each round.
 Feedback consist of:
-	"g" (Green) that represent to correctness
-	"y" (Yellow) that represent to presenting
-	"w" (White) that represent to absent
+	"g" (Green) represents to "correct"
+	"y" (Yellow) represents to "present"
+	"w" (White) represents to "absent"
 Once you've guessed the word in each round, please provide me the feedback as a sequence of color like an example below.
 feedback: ywwgg << 🟨⬜⬜🟩🟩
 ----------------------------
-Calculating the most suitable word... (This process takes long time)
+Finding the most suitable word... (This process takes long time)
 [Round 1] Please guess "arose"
 Feedback: wgwwg
 ⬜🟩⬜⬜🟩
 
-Calculating the most suitable word... (This process takes long time)
+Finding the most suitable word... (This process takes long time)
 [Round 2] Please guess "pubic"
 Feedback: wwyyw
 ⬜⬜🟨🟨⬜
 
-Calculating the most suitable word... (This process takes long time)
+Finding the most suitable word... (This process takes long time)
 [Round 3] Please guess "stand"
 Feedback: wwwgw
 ⬜⬜⬜🟩⬜
 
-Calculating the most suitable word... (This process takes long time)
+Finding the most suitable word... (This process takes long time)
 [Round 4] Please guess "brine"
 Feedback: ggggg
-Hoolay!! We won with in round 4 🎉
+Hoolay!! We win within round 4 🎉
 ```
 
 ## Build and run

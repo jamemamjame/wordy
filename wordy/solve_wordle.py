@@ -23,14 +23,14 @@ def console_interaction_solve_wordle():
     print(
         'I will suggest you the word for guessing in Wordle game base on feedback in each round.')
     print('Feedback consist of:\n'
-          '\t"g" (Green) that represent to correctness\n'
-          '\t"y" (Yellow) that represent to presenting\n'
-          '\t"w" (White) that represent to absent')
+          '\t"g" (Green) represents to "correct"\n'
+          '\t"y" (Yellow) represents to "present"\n'
+          '\t"w" (White) represents to "absent"')
     print('Once you\'ve guessed the word in each round, please provide me the feedback as a sequence of color like an example below.')
     print('feedback: ywwgg << 🟨⬜⬜🟩🟩')
     print('----------------------------')
     while round <= 6:
-        print('Calculating the most suitable word... (This process takes long time)')
+        print('Finding the most suitable word... (This process takes long time)')
         word_to_play = wordy.guess(round=round, played_words=played_words, feedback_cases=feedback_cases)
         played_words.append(word_to_play)
         print(f'[Round {round}] Please guess "{word_to_play}"')
@@ -50,6 +50,6 @@ def console_interaction_solve_wordle():
             print()
             round += 1
     if round <= 6:
-        print(f'Hoolay!! We won with in round {round} 🎉')
+        print(f'Hoolay!! We win within round {round} 🎉')
     else:
         print('😵‍💫 Sorry, I can\'t solve it within time')
