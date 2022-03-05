@@ -1,7 +1,7 @@
 from typing import List
 
-from src.my_enum import GameStatus
-from src.match_cases import generate_feedback
+from script.simulator.game_status import GameStatus
+from wordy.match_cases import generate_feedback
 
 
 class WordleSimulator:

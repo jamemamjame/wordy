@@ -1,5 +1,5 @@
-from src.utils import ALL_WORDS, COLOR
-from src.simulator.wordy_simulator import WordySimulator
+from wordy.utils import ALL_WORDS, COLOR
+from wordy.simulator.wordy_simulator import WordySimulator
 
 
 def validate_feedback(feedback: str) -> bool:
@@ -19,16 +19,18 @@ def console_interaction_solve_wordle():
     played_words = []
     feedback_cases = []
 
-    print('Hi, I\'m Wordy. I\'m ready to solve Wordle game.')
-    print('I will suggest you the word for guessing then please provide me the feedback back.')
+    print('Hi, I\'m Wordy. 🤖🙏🏻')
+    print(
+        'I will suggest you the word for guessing in Wordle game base on feedback in each round.')
     print('Feedback consist of:\n'
-          '\t"g" stand for Green that represent to correctness\n'
-          '\t"y" stand for Yellow that represent to presenting\n'
-          '\t"w" stand for black that represent to absent')
-    print('Please provide me the feedback like below example.')
+          '\t"g" (Green) that represent to correctness\n'
+          '\t"y" (Yellow) that represent to presenting\n'
+          '\t"w" (White) that represent to absent')
+    print('Once you\'ve guessed the word in each round, please provide me the feedback as a sequence of color like an example below.')
     print('feedback: ywwgg << 🟨⬜⬜🟩🟩')
     print('----------------------------')
     while round <= 6:
+        print('Calculating the most suitable word... (This process takes long time)')
         word_to_play = wordy.guess(round=round, played_words=played_words, feedback_cases=feedback_cases)
         played_words.append(word_to_play)
         print(f'[Round {round}] Please guess "{word_to_play}"')
@@ -48,6 +50,6 @@ def console_interaction_solve_wordle():
             print()
             round += 1
     if round <= 6:
-        print('Congrats! We won 🎉')
+        print(f'Hoolay!! We won with in round {round} 🎉')
     else:
         print('😵‍💫 Sorry, I can\'t solve it within time')

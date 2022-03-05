@@ -1,4 +1,9 @@
+import os
+
 from typing import List
+
+PATH_WORDS = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'resources/sgb-words.txt')
+PATH_WORDS_PROB = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'resources/words_prob.pickle')
 
 
 def recur(li, position: int):
@@ -18,7 +23,8 @@ def recur(li, position: int):
 
 
 def get_all_words():
-    with open('src/resources/sgb-words.txt', 'r') as f:
+    global PATH_WORDS
+    with open(PATH_WORDS, 'r') as f:
         all_words = [l.strip() for l in f.readlines()]
     return all_words
 

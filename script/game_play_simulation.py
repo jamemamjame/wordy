@@ -1,9 +1,9 @@
 import time
 
-from src.my_enum import GameStatus
-from src.utils import ALL_WORDS
-from src.simulator.wordle_simulator import WordleSimulator
-from src.simulator.wordy_simulator import WordySimulator
+from script.simulator.game_status import GameStatus
+from wordy.utils import ALL_WORDS
+from script.simulator.wordle_simulator import WordleSimulator
+from wordy.simulator.wordy_simulator import WordySimulator
 
 
 def simulate_game(answer_word: str):

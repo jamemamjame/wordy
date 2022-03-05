@@ -2,9 +2,10 @@ import pickle
 
 from typing import List
 
-from src.match_cases import filter_words_by_case
-from src.score_calculator import calculate_gini_by_word
-from src.words_probs_calculation import calculate_words_prob
+from wordy.match_cases import filter_words_by_case
+from wordy.score_calculator import calculate_gini_by_word
+from wordy.utils import PATH_WORDS_PROB
+from wordy.words_probs_calculator import calculate_words_prob
 
 
 class WordySimulator:
@@ -30,7 +31,7 @@ class WordySimulator:
                 return word
 
     def __guess_first_round(self):
-        with open('src/resources/words_prob.pickle', 'rb') as f:
+        with open(PATH_WORDS_PROB, 'rb') as f:
             words_prob = pickle.load(f)
         sorted_word_score = self.calculate_words_should_be_played_score(words_prob)
         return sorted_word_score
