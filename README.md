@@ -1,10 +1,9 @@
 # wordy
 Console interaction program to solve Wordle game https://www.nytimes.com/games/wordle/index.html
 
-```bash
-python main.py
-```
+![wordy_wordle](public/wordy_wordle.gif)
 
+## Example interaction message
 ```
 Hi, I'm Wordy. 🤖🙏🏻
 I will suggest you the word for guessing in Wordle game base on feedback in each round.
@@ -17,18 +16,23 @@ feedback: ywwgg << 🟨⬜⬜🟩🟩
 ----------------------------
 Calculating the most suitable word... (This process takes long time)
 [Round 1] Please guess "arose"
-Feedback: gwwwy
-🟩⬜⬜⬜🟨
+Feedback: wgwwg
+⬜🟩⬜⬜🟩
 
 Calculating the most suitable word... (This process takes long time)
-[Round 2] Please guess "lined"
-Feedback: wwwyg
-⬜⬜⬜🟨🟩
+[Round 2] Please guess "pubic"
+Feedback: wwyyw
+⬜⬜🟨🟨⬜
 
 Calculating the most suitable word... (This process takes long time)
-[Round 3] Please guess "ahead"
+[Round 3] Please guess "stand"
+Feedback: wwwgw
+⬜⬜⬜🟩⬜
+
+Calculating the most suitable word... (This process takes long time)
+[Round 4] Please guess "brine"
 Feedback: ggggg
-Hoolay!! We won with in round 3 🎉
+Hoolay!! We won with in round 4 🎉
 ```
 
 ## Build and run
