@@ -41,13 +41,13 @@ def console_interaction_solve_wordle():
                 break
             else:
                 print('Feedback is incorrect, please provide again such as "wwwyg".')
+        transformed_feedback = list(map(lambda c: COLOR[c], feedback))
+        feedback_cases.append(transformed_feedback)
+        print(''.join(transformed_feedback))
+        print()
         if feedback == 'ggggg':
             break
         else:
-            transformed_feedback = list(map(lambda c: COLOR[c], feedback))
-            feedback_cases.append(transformed_feedback)
-            print(''.join(transformed_feedback))
-            print()
             round += 1
     if round <= 6:
         print(f'Hoolay!! We win within round {round} 🎉')

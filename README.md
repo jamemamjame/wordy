@@ -32,6 +32,8 @@ Feedback: wwwgw
 Finding the most suitable word... (This process takes long time)
 [Round 4] Please guess "brine"
 Feedback: ggggg
+🟩🟩🟩🟩🟩
+
 Hoolay!! We win within round 4 🎉
 ```
 
@@ -39,7 +41,7 @@ Hoolay!! We win within round 4 🎉
 
 ### To run locally:
 
-Clone the repo then perform these command
+Clone this repo using **git-lfs** then perform these command
 ```
 poetry install
 pyhon main.py
