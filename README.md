@@ -1,39 +1,48 @@
 # wordy
-Console interaction pProgram to solve Wordle game https://www.nytimes.com/games/wordle/index.html
+Console interaction program to solve Wordle game https://www.nytimes.com/games/wordle/index.html
 
 ```bash
 python main.py
 ```
 
 ```
-Hi, I'm Wordy. I'm ready to solve Wordle game.
-I will suggest you the word for guessing then please provide me the feedback back.
+Hi, I'm Wordy. 🤖🙏🏻
+I will suggest you the word for guessing in Wordle game base on feedback in each round.
 Feedback consist of:
-	"g" stand for Green that represent to correctness
-	"y" stand for Yellow that represent to presenting
-	"w" stand for black that represent to absent
-Please provide me the feedback like below example.
+	"g" (Green) that represent to correctness
+	"y" (Yellow) that represent to presenting
+	"w" (White) that represent to absent
+Once you've guessed the word in each round, please provide me the feedback as a sequence of color like an example below.
 feedback: ywwgg << 🟨⬜⬜🟩🟩
 ----------------------------
+Calculating the most suitable word... (This process takes long time)
 [Round 1] Please guess "arose"
 Feedback: gwwwy
 🟩⬜⬜⬜🟨
 
+Calculating the most suitable word... (This process takes long time)
 [Round 2] Please guess "lined"
 Feedback: wwwyg
 ⬜⬜⬜🟨🟩
 
+Calculating the most suitable word... (This process takes long time)
 [Round 3] Please guess "ahead"
 Feedback: ggggg
-Congrats! We won 🎉
+Hoolay!! We won with in round 3 🎉
 ```
 
-Build and run
-___
-To Run Locally:
+## Build and run
+
+### To run locally:
+
 Clone the repo then perform these command
 ```
 poetry install
 pyhon main.py
 ```
 
+### To build/run docker container:
+```bash
+$> docker build -t wordy:1.0.0 -f docker/Dockerfile .
+$> docker run -it wordy:1.0.0
+```
